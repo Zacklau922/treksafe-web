@@ -102,7 +102,7 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
                 📍
               </div>
             </DrawerTrigger>
-            <DrawerContent>
+            <DrawerContent className="max-w-4xl mx-auto max-h-[80vh] overflow-y-auto">
               <DrawerHeader>
                 <DrawerTitle>{point.name}</DrawerTitle>
                 <DrawerDescription>
@@ -111,10 +111,12 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
               </DrawerHeader>
               <div>
                 {point.image && (
-                  <img
+                  <Image
                     src={point.image}
                     alt={point.name}
-                    className="w-full h-32 object-cover rounded-lg mb-2"
+                    width={1000}
+                    height={1000}
+                    className="w-full object-cover rounded-lg mb-2 p-3"
                   />
                 )}
               </div>

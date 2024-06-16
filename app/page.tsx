@@ -26,6 +26,12 @@ export default async function Index() {
 
   return (
     <div className="flex-1 w-full flex flex-col gap-6 items-center">
+      <div className="flex flex-col items-center py-6">
+        <p className="text-3xl lg:text-4xl  mx-auto max-w-xl text-center">
+          TrekSafe
+        </p>
+      </div>
+
       <div className="animate-in flex-1 flex flex-col gap-6 max-w-4xl px-3 py-6">
         <main className="flex-1 flex flex-col gap-6">
           <ClickableMap src="/map/tokun-01.png" points={points} />
