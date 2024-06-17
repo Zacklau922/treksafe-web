@@ -51,7 +51,7 @@ const points = [
 
 export default async function Index() {
   return (
-    <div className="flex-1 w-full flex flex-col  items-center">
+    <div className="flex-1 w-full flex flex-col items-center bg-green-50 text-green-700 min-h-screen">
       <div className="flex flex-col items-center pt-6">
         <p className="text-3xl font-bold lg:text-4xl mx-auto max-w-xl text-center">
           Cherok Tok Kun Map
