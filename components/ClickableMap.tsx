@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { CircleIcon, InfoIcon, Loader2Icon } from "lucide-react";
 
 type Point = {
   name: string;
@@ -77,7 +78,14 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
 
   return (
     <div className="relative">
-      <Image ref={imageRef} src={src} alt="Map" width={3000} height={3000} />
+      <Image
+        className="rounded-2xl"
+        ref={imageRef}
+        src={src}
+        alt="Map"
+        width={3000}
+        height={3000}
+      />
       {points.map((point, index) => {
         const scaledCoords = getScaledCoords(point.coords);
         return (
@@ -86,7 +94,7 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
             open={selectedPoint === point}
             onClose={handleClose}
           >
-            <DrawerTrigger>
+            <DrawerTrigger asChild className="focus:outline-none ">
               <div
                 className="absolute text-2xl cursor-pointer map-point"
                 style={{
@@ -99,30 +107,36 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
                   handleClick(point);
                 }}
               >
-                📍
+                <CircleIcon size={30} className="flex opacity-0 " />
               </div>
             </DrawerTrigger>
-            <DrawerContent className="max-w-4xl mx-auto max-h-[80vh] overflow-y-auto">
-              <DrawerHeader>
-                <DrawerTitle>{point.name}</DrawerTitle>
-                <DrawerDescription>
-                  Coordinates: ({point.coords.x}, {point.coords.y})
-                </DrawerDescription>
-              </DrawerHeader>
-              <div>
-                {point.image && (
-                  <Image
-                    src={point.image}
-                    alt={point.name}
-                    width={1000}
-                    height={1000}
-                    className="w-full object-cover rounded-lg mb-2 p-3"
-                  />
-                )}
+            <DrawerContent className="focus:outline-none">
+              <div className="text-2xl font-bold text-inherit mx-auto max-w-2xl mb-10 pt-3 text-slate-800 px-4 overflow-y-auto max-h-[80vh] ">
+                <div className="flex flex-col  items-center text-2xl xl:text-3xl mx-auto justify-center py-2">
+                  <div className="flex justify-center w-full items-center mx-auto">
+                    <h1>{point.name}</h1>
+                  </div>
+
+                  {/* <div className="flex items-center gap-1 mx-auto px-3">
+                    <InfoIcon width={12} color="grey" />
+                    <p className="text-xs font-light italic text-slate-500">
+                      Good place
+                    </p>
+                  </div> */}
+
+                  <div className="mx-auto max-w-2xl w-full">
+                    {point.image && (
+                      <Image
+                        src={point.image}
+                        alt={point.name}
+                        width={1000}
+                        height={1000}
+                        className="w-full object-cover rounded-lg mb-2 p-3"
+                      />
+                    )}
+                  </div>
+                </div>
               </div>
-              <DrawerFooter>
-                <Button onClick={handleClose}>Close</Button>
-              </DrawerFooter>
             </DrawerContent>
           </Drawer>
         );
