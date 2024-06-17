@@ -19,7 +19,7 @@ const points = [
   },
   {
     name: "Big Tree",
-    coords: { x: 1640, y: 1580 },
+    coords: { x: 1660, y: 1530 },
     image: "/tokun/big-tree.png",
   },
   {

@@ -107,7 +107,7 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
                   handleClick(point);
                 }}
               >
-                <CircleIcon size={30} className="flex opacity-0 " />
+                <CircleIcon size={40} className="flex opacity-0 " />
               </div>
             </DrawerTrigger>
             <DrawerContent className="focus:outline-none">
