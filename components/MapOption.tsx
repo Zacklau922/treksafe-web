@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import LiveMap from "./LiveMap";
 import ClickableMap from "./ClickableMap";
 import { Button } from "./ui/button";
 import {
@@ -11,6 +10,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import dynamic from "next/dynamic";
+
+const DynamicLiveMap = dynamic(() => import("./LiveMap"), {
+  ssr: false,
+});
 
 const points = [
   {
@@ -69,7 +73,7 @@ const MapOption = () => {
 
   return (
     <div className="relative">
-      <div className="animate-in flex-1 flex flex-col gap-6 max-w-2xl px-3">
+      <div className=" flex-1 flex flex-col gap-6 max-w-2xl px-3">
         <Button
           className="flex items-center justify-center mx-auto px-3 rounded-xl"
           onClick={toggleMap}
@@ -78,7 +82,9 @@ const MapOption = () => {
         </Button>
         <main className="">
           {showLiveMap ? (
-            <LiveMap />
+            <div className="max-w-2xl w-full">
+              <DynamicLiveMap />
+            </div>
           ) : (
             <ClickableMap src="/map/tokun-01.png" points={points} />
           )}

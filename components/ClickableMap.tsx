@@ -20,9 +20,6 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
   const [selectedPoint, setSelectedPoint] = useState<Point | null>(null);
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const imageRef = useRef<HTMLImageElement>(null);
-  // const [preloadedImages, setPreloadedImages] = useState<{
-  //   [key: string]: string;
-  // }>({});
 
   const handleClick = (point: Point) => {
     setSelectedPoint(point);
@@ -38,25 +35,6 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
       setSelectedPoint(null);
     }
   }, []);
-
-  // useEffect(() => {
-  //   // Preload images
-  //   const preloadImages = async () => {
-  //     const loadedImages: { [key: string]: string } = {};
-  //     for (const point of points) {
-  //       if (point.image) {
-  //         const img = new window.Image();
-  //         img.src = point.image;
-  //         await new Promise<void>((resolve) => {
-  //           img.onload = () => resolve();
-  //         });
-  //         loadedImages[point.image] = point.image;
-  //       }
-  //     }
-  //     setPreloadedImages(loadedImages);
-  //   };
-  //   preloadImages();
-  // }, [points]);
 
   useEffect(() => {
     const img = imageRef.current;
@@ -93,6 +71,7 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
     <div className="relative">
       <Image
         className="rounded-2xl"
+        priority={true}
         ref={imageRef}
         src={src}
         alt="Map"
