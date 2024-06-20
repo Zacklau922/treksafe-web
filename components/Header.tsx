@@ -12,9 +12,9 @@ const Header = () => {
         </Button>
       </div>
 
-      <div className="flex flex-col items-center text-center flex-none">
+      <div className="flex flex-col items-center text-center flex-none gap-1">
         <p className="text-2xl font-bold lg:text-4xl mx-auto max-w-xl">
-          Cherok Tok Kun Map
+          Tokun Map
         </p>
         <div className="flex gap-1 items-center">
           <PointerIcon size={12} />

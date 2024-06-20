@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -32,6 +32,7 @@ const CustomIcon = L.icon({
   iconAnchor: [12, 41],
 });
 
+// new but not tracking current location
 function LocationMarker() {
   const map = useMapEvents({
     locationfound(e) {
@@ -43,6 +44,40 @@ function LocationMarker() {
       alert(e.message);
     },
   });
+
+  return null;
+}
+
+//old but tracking current location
+function LocationMarkerOld() {
+  const map = useMap();
+
+  useEffect(() => {
+    map.locate({ setView: true, maxZoom: 16 });
+
+    function onLocationFound(e: L.LocationEvent) {
+      const radius = e.accuracy;
+
+      L.marker(e.latlng)
+        .addTo(map)
+        .bindPopup(`You are within ${radius} meters from this point`)
+        .openPopup();
+
+      L.circle(e.latlng, radius).addTo(map);
+    }
+
+    function onLocationError(e: L.ErrorEvent) {
+      alert(e.message);
+    }
+
+    map.on("locationfound", onLocationFound);
+    map.on("locationerror", onLocationError);
+
+    return () => {
+      map.off("locationfound", onLocationFound);
+      map.off("locationerror", onLocationError);
+    };
+  }, [map]);
 
   return null;
 }
@@ -82,14 +117,15 @@ export default function LiveMap() {
       <MapContainer
         center={defaultPosition}
         zoom={16}
-        scrollWheelZoom={false}
-        className="max-w-2xl rounded-2xl mt-8"
+        scrollWheelZoom={true}
+        style={{ height: "600px", maxWidth: "95%", margin: "auto" }}
+        className="rounded-lg shadow-lg"
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <LocationMarker />
+        <LocationMarkerOld />
         {markers.map((marker, index) => (
           <Marker key={index} position={marker.position} icon={CustomIcon}>
             <Popup>
@@ -99,8 +135,9 @@ export default function LiveMap() {
                   <Image
                     src={marker.image}
                     alt={marker.alt}
-                    width={150}
-                    height={300}
+                    width={1000}
+                    height={1000}
+                    style={{ width: "100px", height: "auto" }}
                   />
                 )}
               </div>

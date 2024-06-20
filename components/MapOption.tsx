@@ -65,7 +65,7 @@ const points = [
 ];
 
 const MapOption = () => {
-  const [showLiveMap, setShowLiveMap] = useState(false);
+  const [showLiveMap, setShowLiveMap] = useState(true);
 
   const toggleMap = () => {
     setShowLiveMap((prevState) => !prevState);
@@ -73,28 +73,29 @@ const MapOption = () => {
 
   return (
     <div className="relative">
-      <div className=" flex-1 flex flex-col gap-6 max-w-2xl px-3">
+      <div className=" flex-1 flex flex-col gap-3 max-w-2xl px-3">
         {/* <Button
+          variant="outline"
           className="flex items-center justify-center mx-auto px-3 rounded-xl"
           onClick={toggleMap}
         >
-          Show Live Map
+          Switch Map
         </Button> */}
         {/* <main className="">
           {showLiveMap ? (
-            <div className="max-w-2xl w-full">
+            <div className="max-w-2xl mx-auto ">
               <DynamicLiveMap />
             </div>
           ) : (
             <ClickableMap src="/map/tokun-01.png" points={points} />
           )}
         </main> */}
-
-        <DynamicLiveMap />
       </div>
 
-      <div className="flex justify-between items-center max-w-2xl mx-auto gap-1 px-3">
-        <div className="flex flex-col w-full py-3 px-1 gap-2">
+      <DynamicLiveMap />
+
+      <div className="flex justify-between items-center max-w-2xl mx-auto gap-1 px-3 my-3">
+        {/* <div className="flex flex-col w-full py-3 px-1 gap-2">
           <Dialog>
             <DialogTrigger>
               <Button
@@ -151,7 +152,7 @@ const MapOption = () => {
           >
             Lost & Found
           </Button>
-        </div>
+        </div> */}
 
         <div className="flex flex-col justify-center items-center rounded-2xl border border-green-600 w-full py-5 bg-white">
           <h1 className="font-bold">Emergency Contact</h1>
