@@ -74,13 +74,13 @@ const MapOption = () => {
   return (
     <div className="relative">
       <div className=" flex-1 flex flex-col gap-6 max-w-2xl px-3">
-        <Button
+        {/* <Button
           className="flex items-center justify-center mx-auto px-3 rounded-xl"
           onClick={toggleMap}
         >
           Show Live Map
-        </Button>
-        <main className="">
+        </Button> */}
+        {/* <main className="">
           {showLiveMap ? (
             <div className="max-w-2xl w-full">
               <DynamicLiveMap />
@@ -88,7 +88,9 @@ const MapOption = () => {
           ) : (
             <ClickableMap src="/map/tokun-01.png" points={points} />
           )}
-        </main>
+        </main> */}
+
+        <DynamicLiveMap />
       </div>
 
       <div className="flex justify-between items-center max-w-2xl mx-auto gap-1 px-3">

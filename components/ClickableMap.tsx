@@ -82,48 +82,6 @@ const ClickableMap: React.FC<ClickableMapProps> = ({ src, points }) => {
       {points.map((point, index) => {
         const scaledCoords = getScaledCoords(point.coords);
         return (
-          // <Dialog key={index} open={selectedPoint === point}>
-          //   <DialogTrigger>
-          //     <div
-          //       className="absolute text-2xl cursor-pointer map-point"
-          //       style={{
-          //         left: `${scaledCoords.x}px`,
-          //         top: `${scaledCoords.y}px`,
-          //         transform: "translate(-50%, -50%)",
-          //       }}
-          //       onClick={(e) => {
-          //         e.stopPropagation();
-          //         handleClick(point);
-          //       }}
-          //     >
-          //       <CircleIcon size={40} className="flex opacity-0 " />
-          //     </div>
-          //   </DialogTrigger>
-          //   <DialogContent className="flex w-10/12 rounded-xl flex-col items-center">
-          //     <div className="text-2xl font-bold text-inherit mx-auto max-w-2xl mb-10 pt-3 text-slate-800 px-4 overflow-y-auto max-h-[80vh] ">
-          //       <div className="flex flex-col  items-center text-2xl xl:text-3xl mx-auto justify-center py-2">
-          //         <div className="flex justify-center w-full items-center mx-auto">
-          //           <h1>{point.name}</h1>
-          //         </div>
-
-          //         {point.image && preloadedImages[point.image] && (
-          //           <div className="mx-auto max-w-2xl w-full">
-          //             {point.image && (
-          //               <Image
-          //                 src={point.image}
-          //                 alt={point.name}
-          //                 width={1000}
-          //                 height={1000}
-          //                 className="w-full object-cover rounded-lg mb-2 p-3"
-          //               />
-          //             )}
-          //           </div>
-          //         )}
-          //       </div>
-          //     </div>
-          //   </DialogContent>
-          // </Dialog>
-
           <Drawer
             key={index}
             open={selectedPoint === point}
