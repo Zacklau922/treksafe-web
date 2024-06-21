@@ -5,18 +5,22 @@ import {
   TileLayer,
   Marker,
   Popup,
-  useMapEvents,
+  LayersControl,
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Image from "next/image";
-
-// Importing leaflet default marker icons
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerIconShadow from "leaflet/dist/images/marker-shadow.png";
 import { Button } from "./ui/button";
 import { Navigation2Icon, NavigationIcon } from "lucide-react";
+import { FullscreenControl } from "react-leaflet-fullscreen";
+import { ScaleControl } from "react-leaflet";
+import "react-leaflet-fullscreen/styles.css";
+import "leaflet/dist/leaflet.css";
+
+const thunderforestApiKey = "3606dcc00ff541e2988c1b5db48efbcb";
 
 // Fixing the default icon issue
 const DefaultIcon = L.icon({
@@ -34,61 +38,65 @@ const CustomIcon = L.icon({
   iconAnchor: [12, 41],
 });
 
-// new but not tracking current location
-function LocationMarker() {
-  const map = useMapEvents({
-    locationfound(e) {
-      map.setView(e.latlng, map.getZoom()); // Set the map view to the found location
-      L.marker(e.latlng).addTo(map).bindPopup("You are here").openPopup();
-      L.circle(e.latlng, { radius: 200 }).addTo(map);
-    },
-    locationerror(e) {
-      alert(e.message);
-    },
-  });
-
-  return null;
-}
-
-interface LocationMarkerOldProps {
-  triggerLocation: boolean;
-}
-
-//old but tracking current location
-function LocationMarkerOld({ triggerLocation }: LocationMarkerOldProps) {
+function LocateButton() {
   const map = useMap();
 
-  useEffect(() => {
-    if (triggerLocation) {
-      map.locate({ setView: true, maxZoom: 16 });
-    }
-  }, [map, triggerLocation]);
+  const handleLocationRequest = () => {
+    map.locate({ setView: true, maxZoom: 16 });
+  };
 
-  useEffect(() => {
-    function onLocationFound(e: L.LocationEvent) {
-      const radius = e.accuracy;
-
-      L.marker(e.latlng)
-        .addTo(map)
-        .bindPopup(`You are within ${radius} meters from this point`)
-        .openPopup();
-    }
-
-    function onLocationError(e: L.ErrorEvent) {
-      alert(e.message);
-    }
-
-    map.on("locationfound", onLocationFound);
-    map.on("locationerror", onLocationError);
-
-    return () => {
-      map.off("locationfound", onLocationFound);
-      map.off("locationerror", onLocationError);
-    };
-  }, [map]);
-
-  return null;
+  return (
+    <div style={{ position: "absolute", top: 10, left: 10, zIndex: 1000 }}>
+      <Button
+        size="icon"
+        variant="outline"
+        className="flex "
+        onClick={handleLocationRequest}
+      >
+        <NavigationIcon />
+      </Button>
+    </div>
+  );
 }
+
+// interface LocationMarkerOldProps {
+//   triggerLocation: boolean;
+// }
+
+// function LocationMarkerOld({ triggerLocation }: LocationMarkerOldProps) {
+//   const map = useMap();
+
+//   useEffect(() => {
+//     if (triggerLocation) {
+//       map.locate({ setView: true, maxZoom: 16 });
+//     }
+//   }, [map, triggerLocation]);
+
+//   useEffect(() => {
+//     function onLocationFound(e: L.LocationEvent) {
+//       const radius = e.accuracy;
+
+//       L.marker(e.latlng)
+//         .addTo(map)
+//         .bindPopup(`You are within ${radius} meters from this point`)
+//         .openPopup();
+//     }
+
+//     function onLocationError(e: L.ErrorEvent) {
+//       alert(e.message);
+//     }
+
+//     map.on("locationfound", onLocationFound);
+//     map.on("locationerror", onLocationError);
+
+//     return () => {
+//       map.off("locationfound", onLocationFound);
+//       map.off("locationerror", onLocationError);
+//     };
+//   }, [map]);
+
+//   return null;
+// }
 
 const markers = [
   {
@@ -127,29 +135,65 @@ export default function LiveMap() {
 
   return (
     <div className="max-w-2xl relative justify-center flex flex-col items-center">
-      <Button
+      {/* <Button
         size="sm"
-        className="rounded-2xl mb-3 px-5"
+        className="rounded-3xl mb-3 px-5"
         onClick={handleLocationRequest}
       >
         <span className="flex items-center gap-1">
-          <NavigationIcon width={18} />
+          <NavigationIcon width={15} />
           Locate Me
         </span>
-      </Button>
+      </Button> */}
 
       <MapContainer
+        id="map"
         center={defaultPosition}
+        zoomControl={false}
         zoom={15}
         scrollWheelZoom={true}
         style={{ height: "600px", maxWidth: "95%", margin: "auto" }}
-        className="rounded-lg shadow-lg"
+        className="rounded-3xl shadow-lg max-w-2xl"
       >
-        <TileLayer
+        <ScaleControl position="bottomleft" />
+        <LocateButton />
+
+        {/* <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <LocationMarkerOld triggerLocation={triggerLocation} />
+        /> */}
+
+        <LayersControl position="topright">
+          <LayersControl.BaseLayer checked name="OpenStreetMap">
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer name="OpenCycleMap">
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles courtesy of <a href="https://www.thunderforest.com/maps/cycle/">Thunderforest</a>'
+              url={`https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey=${thunderforestApiKey}`}
+            />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer name="Outdoors">
+            <TileLayer
+              attribution='&copy; <a href="https://www.thunderforest.com/maps/outdoors/">Thunderforest</a>'
+              url={`https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=${thunderforestApiKey}`}
+            />
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer name="Transport Dark">
+            <TileLayer
+              attribution='&copy; <a href="https://www.thunderforest.com/maps/outdoors/">Thunderforest</a>'
+              url={`https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=${thunderforestApiKey}`}
+            />
+          </LayersControl.BaseLayer>
+        </LayersControl>
+
+        {/* <FullscreenControl position="topright"/> */}
+
+        {/* <LocationMarkerOld triggerLocation={triggerLocation} /> */}
+
         {markers.map((marker, index) => (
           <Marker key={index} position={marker.position} icon={CustomIcon}>
             <Popup>

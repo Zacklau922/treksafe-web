@@ -11,6 +11,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
+import { PhoneIcon } from "lucide-react";
 
 const DynamicLiveMap = dynamic(() => import("./LiveMap"), {
   ssr: false,
@@ -65,14 +67,22 @@ const points = [
 ];
 
 const MapOption = () => {
-  const [showLiveMap, setShowLiveMap] = useState(true);
+  const [showLiveMap, setShowLiveMap] = useState(false); // Initially set to false to show skeleton
+
+  // Simulate loading delay
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLiveMap(true); // Show map after 2 seconds (adjust as needed)
+    }, 2000); // Simulating a 2 second loading delay
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleMap = () => {
     setShowLiveMap((prevState) => !prevState);
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <div className=" flex-1 flex flex-col gap-3 max-w-2xl px-3">
         {/* <Button
           variant="outline"
@@ -92,9 +102,18 @@ const MapOption = () => {
         </main> */}
       </div>
 
-      <DynamicLiveMap />
+      <div className=" flex-1 flex flex-col gap-3 max-w-2xl mx-auto">
+        {showLiveMap ? (
+          <DynamicLiveMap />
+        ) : (
+          <Skeleton
+            className="  rounded-3xl w-full px-3"
+            style={{ height: "600px", maxWidth: "95%", margin: "auto" }}
+          />
+        )}
+      </div>
 
-      <div className="flex justify-between items-center max-w-2xl mx-auto gap-1 px-3 my-3">
+      <div className="flex justify-between items-center max-w-2xl mx-auto gap-1 my-3">
         {/* <div className="flex flex-col w-full py-3 px-1 gap-2">
           <Dialog>
             <DialogTrigger>
@@ -153,13 +172,42 @@ const MapOption = () => {
             Lost & Found
           </Button>
         </div> */}
+        {showLiveMap ? (
+          <div className="flex flex-col items-center gap-2 w-full mx-3 my-2 rounded-2xl border border-green-700 py-6 bg-white max-w-2xl px-9 shadow-lg">
+            <h1 className="font-bold mb-3">Emergency Contact</h1>
 
-        <div className="flex flex-col justify-center items-center rounded-2xl border border-green-600 w-full py-5 bg-white">
-          <h1 className="font-bold">Emergency Contact</h1>
-          <h1>Balai Bomba (BM)</h1>
-          <li>04 – 538 4444</li>
-          <li>04 – 537 4693</li>
-        </div>
+            <Button
+              size="lg"
+              className="w-full rounded-xl  bg-green-700 font-bold"
+            >
+              <a
+                href="tel:04-5384444"
+                className="flex items-center justify-center gap-2 text-base text-white py-3 px-4"
+              >
+                <PhoneIcon size={18} />
+                <span>Balai Bomba 04 - 538 4444</span>
+              </a>
+            </Button>
+
+            <Button
+              size="lg"
+              className="w-full rounded-xl   bg-green-700 font-bold"
+            >
+              <a
+                href="tel:04-5374693"
+                className="flex items-center justify-center gap-2 text-base text-white py-3 px-4"
+              >
+                <PhoneIcon size={18} />
+                <span>Balai Bomba 04 - 537 4693</span>
+              </a>
+            </Button>
+          </div>
+        ) : (
+          <Skeleton
+            className="  rounded-3xl w-full"
+            style={{ height: "200px", maxWidth: "95%", margin: "auto" }}
+          />
+        )}
       </div>
     </div>
   );

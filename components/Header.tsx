@@ -1,32 +1,37 @@
 "use client";
 import React from "react";
 import { Button } from "./ui/button";
-import { LanguagesIcon, NavigationIcon, PointerIcon } from "lucide-react";
+import {
+  DropletIcon,
+  LanguagesIcon,
+  MapPinIcon,
+  MountainIcon,
+  MountainSnowIcon,
+  NavigationIcon,
+  PinIcon,
+  PointerIcon,
+} from "lucide-react";
 
 const Header = () => {
   return (
-    <div className="flex justify-between items-center max-w-2xl mx-auto p-3 w-full">
-      <div className="flex-1 flex justify-start">
-        <Button variant="outline" size="icon">
-          <NavigationIcon />
-        </Button>
-      </div>
-
-      <div className="flex flex-col items-center text-center flex-none gap-1">
-        <p className="text-2xl font-bold lg:text-4xl mx-auto max-w-xl">
-          Tokun Map
-        </p>
-        <div className="flex gap-1 items-center">
-          <PointerIcon size={12} />
-          <p className="text-xs font-semibold mx-auto max-w-xl">
-            Click the icon to view details
-          </p>
-        </div>
-      </div>
-
-      <div className="flex-1 flex justify-end">
-        <Button variant="outline" size="icon">
-          <LanguagesIcon />
+    <div className="max-w-2xl mx-auto w-full">
+      <div className="flex justify-between items-center py-3 px-6">
+        <h1 className="text-3xl font-bold">
+          {" "}
+          <span className="flex items-center gap-1">
+            <MountainSnowIcon size={30} />
+            TrekSafe
+          </span>
+        </h1>
+        <Button
+          size="sm"
+          variant="outline"
+          className="rounded-3xl font-bold border-green-700"
+        >
+          <span className="flex items-center gap-1">
+            <MapPinIcon width={15} />
+            Tokun Hill
+          </span>
         </Button>
       </div>
     </div>
