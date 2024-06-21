@@ -185,7 +185,7 @@ const MapOption = () => {
                 className="flex items-center justify-center gap-2 text-base text-white py-3 px-4"
               >
                 <PhoneIcon size={18} />
-                <span>Balai Bomba 04 - 538 4444</span>
+                <span>Balai Bomba (BM): 04 - 538 4444</span>
               </a>
             </Button>
 
@@ -198,7 +198,7 @@ const MapOption = () => {
                 className="flex items-center justify-center gap-2 text-base text-white py-3 px-4"
               >
                 <PhoneIcon size={18} />
-                <span>Balai Bomba 04 - 537 4693</span>
+                <span>Balai Bomba (BM): 04 - 537 4693</span>
               </a>
             </Button>
           </div>

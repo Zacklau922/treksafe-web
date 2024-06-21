@@ -7,18 +7,19 @@ export default async function Index() {
       <Header />
 
       <MapOption />
-
       <footer className="w-full border-t border-t-foreground/10 p-8 mt-6 flex justify-center text-center text-xs">
         <p>
-          Created by{" "}
+          Created By{" "}
           <a
-            href="https://www.instagram.com/zack_922/"
+            href="https://buymeacoffee.com/zacklau"
             target="_blank"
             className="font-bold hover:underline"
             rel="noreferrer"
           >
             Zack Lau
           </a>
+          <br />
+          Support me by buying me a coffee!
         </p>
       </footer>
     </div>
