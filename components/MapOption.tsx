@@ -173,12 +173,12 @@ const MapOption = () => {
           </Button>
         </div> */}
         {showLiveMap ? (
-          <div className="flex flex-col items-center gap-2 w-full mx-3 my-2 rounded-2xl border border-green-700 py-6 bg-white max-w-2xl px-9 shadow-lg">
+          <div className="flex flex-col items-center gap-2 w-full justify-center mx-2 my-3 rounded-2xl border border-green-700 py-6 bg-green-50 max-w-2xl px-9 shadow-lg border-dotted">
             <h1 className="font-bold mb-3">Emergency Contact</h1>
 
             <Button
               size="lg"
-              className="w-full rounded-xl  bg-green-700 font-bold"
+              className="w-full rounded-full  bg-green-600 font-semibold"
             >
               <a
                 href="tel:04-5384444"
@@ -191,7 +191,7 @@ const MapOption = () => {
 
             <Button
               size="lg"
-              className="w-full rounded-xl   bg-green-700 font-bold"
+              className="w-full rounded-full bg-green-600 font-semibold"
             >
               <a
                 href="tel:04-5374693"
