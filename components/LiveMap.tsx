@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -15,6 +15,8 @@ import Image from "next/image";
 // Importing leaflet default marker icons
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerIconShadow from "leaflet/dist/images/marker-shadow.png";
+import { Button } from "./ui/button";
+import { Navigation2Icon, NavigationIcon } from "lucide-react";
 
 // Fixing the default icon issue
 const DefaultIcon = L.icon({
@@ -48,13 +50,21 @@ function LocationMarker() {
   return null;
 }
 
+interface LocationMarkerOldProps {
+  triggerLocation: boolean;
+}
+
 //old but tracking current location
-function LocationMarkerOld() {
+function LocationMarkerOld({ triggerLocation }: LocationMarkerOldProps) {
   const map = useMap();
 
   useEffect(() => {
-    map.locate({ setView: true, maxZoom: 16 });
+    if (triggerLocation) {
+      map.locate({ setView: true, maxZoom: 16 });
+    }
+  }, [map, triggerLocation]);
 
+  useEffect(() => {
     function onLocationFound(e: L.LocationEvent) {
       const radius = e.accuracy;
 
@@ -62,8 +72,6 @@ function LocationMarkerOld() {
         .addTo(map)
         .bindPopup(`You are within ${radius} meters from this point`)
         .openPopup();
-
-      L.circle(e.latlng, radius).addTo(map);
     }
 
     function onLocationError(e: L.ErrorEvent) {
@@ -110,13 +118,29 @@ const markers = [
 ];
 
 export default function LiveMap() {
-  const defaultPosition: [number, number] = [5.35836, 100.49319];
+  const [triggerLocation, setTriggerLocation] = useState(false);
+  const defaultPosition: [number, number] = [5.3645, 100.4909];
+
+  const handleLocationRequest = () => {
+    setTriggerLocation(true);
+  };
 
   return (
-    <div className="max-w-2xl relative">
+    <div className="max-w-2xl relative justify-center flex flex-col items-center">
+      <Button
+        size="sm"
+        className="rounded-2xl mb-3 px-5"
+        onClick={handleLocationRequest}
+      >
+        <span className="flex items-center gap-1">
+          <NavigationIcon width={18} />
+          Locate Me
+        </span>
+      </Button>
+
       <MapContainer
         center={defaultPosition}
-        zoom={16}
+        zoom={15}
         scrollWheelZoom={true}
         style={{ height: "600px", maxWidth: "95%", margin: "auto" }}
         className="rounded-lg shadow-lg"
@@ -125,7 +149,7 @@ export default function LiveMap() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <LocationMarkerOld />
+        <LocationMarkerOld triggerLocation={triggerLocation} />
         {markers.map((marker, index) => (
           <Marker key={index} position={marker.position} icon={CustomIcon}>
             <Popup>
