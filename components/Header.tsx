@@ -15,7 +15,7 @@ import {
 const Header = () => {
   return (
     <div className="max-w-2xl mx-auto w-full">
-      <div className="flex justify-between items-center py-3 px-6">
+      <div className="flex justify-between items-center py-5 px-6">
         <h1 className="text-3xl font-bold">
           {" "}
           <span className="flex items-center gap-1">
