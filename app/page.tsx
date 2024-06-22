@@ -1,6 +1,11 @@
 import Header from "@/components/Header";
 import LiveMap from "@/components/LiveMap";
 import MapOption from "@/components/MapOption";
+import dynamic from "next/dynamic";
+
+const DynamicLiveMap = dynamic(() => import("../components/LiveMap"), {
+  ssr: false,
+});
 
 export default async function Index() {
   return (
@@ -8,7 +13,8 @@ export default async function Index() {
       <Header />
 
       {/* <MapOption /> */}
-      <LiveMap />
+      <DynamicLiveMap />
+
       <footer className="w-full border-t border-t-foreground/10 p-8 mt-6 flex justify-center text-center text-xs">
         <p>
           <a
