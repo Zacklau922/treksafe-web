@@ -1,15 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import ClickableMap from "./ClickableMap";
 import { Button } from "./ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PhoneIcon } from "lucide-react";
@@ -19,19 +10,14 @@ const DynamicLiveMap = dynamic(() => import("./LiveMap"), {
 });
 
 const MapOption = () => {
-  const [showLiveMap, setShowLiveMap] = useState(false); // Initially set to false to show skeleton
+  const [showLiveMap, setShowLiveMap] = useState(false);
 
-  // Simulate loading delay
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      setShowLiveMap(true); // Show map after 2 seconds (adjust as needed)
-    }, 2000); // Simulating a 2 second loading delay
+      setShowLiveMap(true);
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
-
-  const toggleMap = () => {
-    setShowLiveMap((prevState) => !prevState);
-  };
 
   return (
     <div className="relative w-full">
