@@ -185,12 +185,6 @@ const markers = [
     alt: "big-tree",
   },
   {
-    position: [5.36969, 100.48474] as [number, number],
-    title: "Viewing Point",
-    image: "",
-    alt: "view-point",
-  },
-  {
     position: [5.36686, 100.48351] as [number, number],
     title: "Tower Station",
     image: "/tokun/tower-station.png",
@@ -208,18 +202,18 @@ const markers = [
     image: "/tokun/old-dam.png",
     alt: "old-dam",
   },
-  {
-    position: [5.36511, 100.49165] as [number, number],
-    title: "Rest Point 1",
-    image: "",
-    alt: "rest-point-1",
-  },
-  {
-    position: [5.36684, 100.48935] as [number, number],
-    title: "Rest Point 2 - 康乐亭",
-    image: "",
-    alt: "rest-point-2",
-  },
+  // {
+  //   position: [5.36511, 100.49165] as [number, number],
+  //   title: "Rest Point 1",
+  //   image: "",
+  //   alt: "rest-point-1",
+  // },
+  // {
+  //   position: [5.36684, 100.48935] as [number, number],
+  //   title: "Rest Point 2 - 康乐亭",
+  //   image: "",
+  //   alt: "rest-point-2",
+  // },
   {
     position: [5.37391, 100.49861] as [number, number],
     title: "View Point 1 (Mengkuang Dam)",
@@ -255,6 +249,72 @@ const markers = [
     title: "Fallen Tree - 老年大树",
     image: "",
     alt: "old-fallen-tree",
+  },
+  {
+    position: [5.36586, 100.48651] as [number, number],
+    title: "Three Red Chairs",
+    image: "/tokun/three-red-chair.png",
+    alt: "three-red-chair",
+  },
+  {
+    position: [5.36729, 100.48558] as [number, number],
+    title: "Dragon Mustache Tree (龙须树)",
+    image: "/tokun/dragon-mustache-tree.png",
+    alt: "dragon-mustache-tree",
+  },
+  {
+    position: [5.36319, 100.48438] as [number, number],
+    title: "Rock Forest (岩林)",
+    image: "/tokun/rock-forest.png",
+    alt: "rock-forest",
+  },
+  {
+    position: [5.36231, 100.48562] as [number, number],
+    title: "Triple Rock",
+    image: "/tokun/triple-rocks.png",
+    alt: "triple-rocks",
+  },
+  {
+    position: [5.36152, 100.48767] as [number, number],
+    title: "Datuk Rock",
+    image: "/tokun/datuk-rock.png",
+    alt: "datuk-rock",
+  },
+  {
+    position: [5.35862, 100.48903] as [number, number],
+    title: "The Mask",
+    image: "/tokun/the-mask.png",
+    alt: "the-mask",
+  },
+  {
+    position: [5.35739, 100.49199] as [number, number],
+    title: "Old Dam",
+    image: "/tokun/old-dam-2.png",
+    alt: "old-dam",
+  },
+  {
+    position: [5.35822, 100.48878] as [number, number],
+    title: "Ivy Roots Rock",
+    image: "/tokun/ivg-roots-rock.png",
+    alt: "ivg-roots-rock",
+  },
+  {
+    position: [5.36464, 100.48199] as [number, number],
+    title: "Big Fallen Tree",
+    image: "/tokun/big-fallen-tree.png",
+    alt: "big-fallen-tree",
+  },
+  {
+    position: [5.37141, 100.48466] as [number, number],
+    title: "800 Rock",
+    image: "/tokun/800.png",
+    alt: "800",
+  },
+  {
+    position: [5.36969, 100.48472] as [number, number],
+    title: "Viewing Point",
+    image: "/tokun/view-point.png",
+    alt: "view-point",
   },
 ];
 
