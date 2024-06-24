@@ -21,34 +21,43 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
+  ChevronsRightIcon,
+  GemIcon,
   HelpCircleIcon,
   InfoIcon,
   MapPinIcon,
   MountainSnowIcon,
+  NavigationIcon,
+  SearchIcon,
 } from "lucide-react";
 
 const Header = () => {
   return (
     <div className="max-w-2xl mx-auto w-full">
-      <div className="flex justify-between items-center py-5 px-3">
-        <h1 className="text-3xl font-bold">
-          {" "}
-          <span className="flex items-center gap-1">
-            <MountainSnowIcon size={30} />
-            TrekSafe
-          </span>
-        </h1>
-
+      <div className="flex justify-between items-center pt-2 pb-2 px-3">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-3xl font-bold">
+            <span className="flex items-center gap-1">
+              <MountainSnowIcon size={30} />
+              TrekSafe
+            </span>
+          </h1>
+          <p className="text-sm   font-semibold">
+            <span className="flex items-center gap-1">
+              <ChevronsRightIcon size={13} />
+              Uncover Hidden Gems on Every Summit
+            </span>
+          </p>
+        </div>
         <Dialog>
           <DialogTrigger asChild>
             <Button
-              size="sm"
-              variant="outline"
-              className="rounded-full font-bold shadow-md"
+              size="icon"
+              variant="ghost"
+              className="rounded-full font-bold"
             >
               <span className="flex items-center gap-1 text-xs">
-                <HelpCircleIcon width={12} />
-                How To Use
+                <HelpCircleIcon width={25} />
               </span>
             </Button>
           </DialogTrigger>

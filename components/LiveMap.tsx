@@ -33,7 +33,13 @@ import customIcon from "/pin-drop-01.svg";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerIconShadow from "leaflet/dist/images/marker-shadow.png";
 import { Button } from "./ui/button";
-import { MapPinIcon, MapPinOffIcon, NavigationIcon } from "lucide-react";
+import {
+  ChevronDownIcon,
+  LocateIcon,
+  MapPinIcon,
+  MapPinOffIcon,
+  NavigationIcon,
+} from "lucide-react";
 import { FullscreenControl } from "react-leaflet-fullscreen";
 import { ScaleControl } from "react-leaflet";
 import "react-leaflet-fullscreen/styles.css";
@@ -54,11 +60,18 @@ const DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
+type MarkerType = {
+  position: [number, number];
+  title: string;
+  image: string;
+  alt: string;
+};
+
 // Create a custom icon
 const CustomIcon = L.icon({
-  iconUrl: "/pin-drop-01.svg", // Update with your custom icon path
-  iconSize: [25, 40],
-  iconAnchor: [12, 25],
+  iconUrl: "/star-1.svg", // Update with your custom icon path
+  iconSize: [15, 15],
+  // iconAnchor: [12, 25],
 });
 interface CustomControlProps {
   position: "topleft" | "topright" | "bottomleft" | "bottomright";
@@ -177,7 +190,49 @@ function LocationMarkerOld({ triggerLocation }: LocationMarkerOldProps) {
   return null;
 }
 
-const markers = [
+const markers: MarkerType[] = [
+  {
+    position: [5.37391, 100.49861] as [number, number],
+    title: "View Point 1",
+    image: "/tokun/mengkuang-1.png",
+    alt: "view-point-1",
+  },
+  {
+    position: [5.37477, 100.48908] as [number, number],
+    title: "View Point 2",
+    image: "/tokun/mengkuang-2.png",
+    alt: "view-point-2",
+  },
+  {
+    position: [5.36969, 100.48472] as [number, number],
+    title: "View Point 3",
+    image: "/tokun/view-point.png",
+    alt: "view-point-3",
+  },
+  {
+    position: [5.35739, 100.49199] as [number, number],
+    title: "Old Dam I",
+    image: "/tokun/old-dam-2.png",
+    alt: "old-dam-1",
+  },
+  {
+    position: [5.37415, 100.49564] as [number, number],
+    title: "Old Dam II",
+    image: "/tokun/old-dam.png",
+    alt: "old-dam-2",
+  },
+  {
+    position: [5.36724, 100.4977] as [number, number],
+    title: "800 Rock I",
+    image: "/tokun/trek-800.jpg",
+    alt: "800-1",
+  },
+  {
+    position: [5.37141, 100.48466] as [number, number],
+    title: "800 Rock II",
+    image: "/tokun/800.png",
+    alt: "800-2",
+  },
   {
     position: [5.3643209, 100.4943647] as [number, number],
     title: "Big Tree",
@@ -185,50 +240,14 @@ const markers = [
     alt: "big-tree",
   },
   {
-    position: [5.36686, 100.48351] as [number, number],
-    title: "Tower Station",
-    image: "/tokun/tower-station.png",
-    alt: "tower-station",
-  },
-  {
-    position: [5.36724, 100.4977] as [number, number],
-    title: "Trek 800",
-    image: "/tokun/trek-800.jpg",
-    alt: "trek-800",
-  },
-  {
-    position: [5.37415, 100.49564] as [number, number],
-    title: "Old Dam",
-    image: "/tokun/old-dam.png",
-    alt: "old-dam",
-  },
-  // {
-  //   position: [5.36511, 100.49165] as [number, number],
-  //   title: "Rest Point 1",
-  //   image: "",
-  //   alt: "rest-point-1",
-  // },
-  // {
-  //   position: [5.36684, 100.48935] as [number, number],
-  //   title: "Rest Point 2 - 康乐亭",
-  //   image: "",
-  //   alt: "rest-point-2",
-  // },
-  {
-    position: [5.37391, 100.49861] as [number, number],
-    title: "View Point 1 (Mengkuang Dam)",
-    image: "/tokun/mengkuang-1.png",
-    alt: "view-point-mengkuang-dam-1",
-  },
-  {
-    position: [5.37477, 100.48908] as [number, number],
-    title: "View Point 2 (Mengkuang Dam)",
-    image: "/tokun/mengkuang-2.png",
-    alt: "view-point-mengkuang-dam-2",
+    position: [5.35862, 100.48903] as [number, number],
+    title: "The Mask",
+    image: "/tokun/the-mask.png",
+    alt: "the-mask",
   },
   {
     position: [5.36842, 100.49029] as [number, number],
-    title: "Anak Irau",
+    title: "Anak Irau Tree",
     image: "/tokun/anak-irau.png",
     alt: "anak-irau",
   },
@@ -240,16 +259,11 @@ const markers = [
   },
   {
     position: [5.36899, 100.49368] as [number, number],
-    title: "350",
+    title: "350 Rock",
     image: "/tokun/350.png",
     alt: "350",
   },
-  {
-    position: [5.36702, 100.49471] as [number, number],
-    title: "Fallen Tree - 老年大树",
-    image: "",
-    alt: "old-fallen-tree",
-  },
+
   {
     position: [5.36586, 100.48651] as [number, number],
     title: "Three Red Chairs",
@@ -280,18 +294,7 @@ const markers = [
     image: "/tokun/datuk-rock.png",
     alt: "datuk-rock",
   },
-  {
-    position: [5.35862, 100.48903] as [number, number],
-    title: "The Mask",
-    image: "/tokun/the-mask.png",
-    alt: "the-mask",
-  },
-  {
-    position: [5.35739, 100.49199] as [number, number],
-    title: "Old Dam",
-    image: "/tokun/old-dam-2.png",
-    alt: "old-dam",
-  },
+
   {
     position: [5.35822, 100.48878] as [number, number],
     title: "Ivy Roots Rock",
@@ -304,18 +307,31 @@ const markers = [
     image: "/tokun/big-fallen-tree.png",
     alt: "big-fallen-tree",
   },
+
   {
-    position: [5.37141, 100.48466] as [number, number],
-    title: "800 Rock",
-    image: "/tokun/800.png",
-    alt: "800",
+    position: [5.36686, 100.48351] as [number, number],
+    title: "Tower Station",
+    image: "/tokun/tower-station.png",
+    alt: "tower-station",
   },
-  {
-    position: [5.36969, 100.48472] as [number, number],
-    title: "Viewing Point",
-    image: "/tokun/view-point.png",
-    alt: "view-point",
-  },
+  // {
+  //   position: [5.36511, 100.49165] as [number, number],
+  //   title: "Rest Point 1",
+  //   image: "",
+  //   alt: "rest-point-1",
+  // },
+  // {
+  //   position: [5.36684, 100.48935] as [number, number],
+  //   title: "Rest Point 2 - 康乐亭",
+  //   image: "",
+  //   alt: "rest-point-2",
+  // },
+  // {
+  //   position: [5.36702, 100.49471] as [number, number],
+  //   title: "Fallen Tree - 老年大树",
+  //   image: "",
+  //   alt: "old-fallen-tree",
+  // },
 ];
 
 export default function LiveMap() {
@@ -325,9 +341,38 @@ export default function LiveMap() {
   const [selectedLocation, setSelectedLocation] =
     useState<keyof LocationCoordinates>("Bukit Cherok Tokun");
   const [triggerLocation, setTriggerLocation] = useState(false);
+  // const mapRef = useRef<L.Map | null>(null);
   const mapRef = useRef<L.Map | null>(null);
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const [selectedMarker, setSelectedMarker] = useState<MarkerType | null>(null);
   const [markersVisible, setMarkersVisible] = useState(true);
   const [showLiveMap, setShowLiveMap] = useState(false);
+
+  const handleLocationRequest = () => {
+    setTriggerLocation(true);
+  };
+
+  const handleAttractionClick = (marker: MarkerType) => {
+    setSelectedMarker(marker);
+    if (mapContainerRef.current) {
+      mapContainerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    if (selectedMarker && mapRef.current) {
+      const map = mapRef.current;
+      map.flyTo(selectedMarker.position, 15);
+      const marker = L.marker(selectedMarker.position, {
+        icon: CustomIcon,
+      }).addTo(map);
+      marker
+        .bindPopup(
+          `<b>${selectedMarker.title}</b><br><img src="${selectedMarker.image}" alt="${selectedMarker.alt}" style="width: 100%; height: auto;">`
+        )
+        .openPopup();
+    }
+  }, [selectedMarker]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -374,60 +419,77 @@ export default function LiveMap() {
   return (
     <div className="relative w-full">
       {/* Select Location */}
-      <div className="flex flex-col items-center max-w-2xl mx-auto gap-1 mb-3">
-        {showLiveMap ? (
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                size="lg"
-                variant="outline"
-                className="rounded-xl font-bold  w-[95%] shadow-md bg-green-50 border-green-600 text-green-600 border-2"
-              >
-                <span className="flex items-center gap-1">
+      <div className="flex justify-between items-center max-w-2xl mx-auto gap-2 px-3 w-full">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full rounded-xl font-bold shadow-md border-green-700 text-green-700"
+            >
+              <span className="flex justify-between w-full items-center gap-1">
+                <span className="flex items-center">
                   <MapPinIcon width={15} />
+                </span>
+                <span className="flex-grow text-center">
                   {selectedLocation}
                 </span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="dialog-content sm:max-w-[425px] w-11/12 rounded-xl">
-              <DialogHeader>
-                <DialogTitle>Select a Mountain</DialogTitle>
-              </DialogHeader>
-              <Select
-                onValueChange={handleLocationSelect}
-                defaultValue={selectedLocation}
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a mountain" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="Bukit Cherok Tokun">
-                      Bukit Cherok Tokun
-                    </SelectItem>
-                    <SelectItem value="Bukit Seraya">Bukit Seraya</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <DialogFooter className="sm:justify-start">
-                <DialogClose asChild>
-                  <Button className="w-full" type="button" variant="default">
-                    Confirm
-                  </Button>
-                </DialogClose>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        ) : (
-          <Skeleton
-            className="  rounded-3xl w-full"
-            style={{ height: "50px", maxWidth: "95%", margin: "auto" }}
-          />
-        )}
+                <span className="flex items-center">
+                  <ChevronDownIcon size={15} />
+                </span>
+              </span>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="dialog-content sm:max-w-[425px] w-11/12 rounded-xl">
+            <DialogHeader>
+              <DialogTitle>Select a Mountain</DialogTitle>
+            </DialogHeader>
+            <Select
+              onValueChange={handleLocationSelect}
+              defaultValue={selectedLocation}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Select a mountain" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="Bukit Cherok Tokun">
+                    Bukit Cherok Tokun
+                  </SelectItem>
+                  <SelectItem value="Bukit Seraya">Bukit Seraya</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <DialogFooter className="sm:justify-start">
+              <DialogClose asChild>
+                <Button className="w-full" type="button" variant="default">
+                  Confirm
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+
+        <div className="flex flex-col items-center mx-auto gap-1">
+          <Button
+            size="lg"
+            variant="outline"
+            className="rounded-xl font-bold shadow-md border-green-700 text-green-700 max-w-[120px]"
+            onClick={handleLocationRequest}
+          >
+            <span className="flex items-center gap-1">
+              <LocateIcon width={15} />
+              Locate Me
+            </span>
+          </Button>
+        </div>
       </div>
 
       {/* Map Container */}
-      <div className=" flex-1 flex flex-col gap-3 max-w-2xl mx-auto">
+      <div
+        ref={mapContainerRef}
+        className=" flex-1 flex flex-col gap-3 max-w-2xl mx-auto my-3"
+      >
         {showLiveMap ? (
           <div className="max-w-2xl relative justify-center flex flex-col items-center">
             <MapContainer
@@ -437,8 +499,8 @@ export default function LiveMap() {
               zoomControl={false}
               zoom={15}
               scrollWheelZoom={true}
-              style={{ height: "600px", maxWidth: "95%", margin: "auto" }}
-              className="rounded-xl shadow-lg max-w-2xl z-10"
+              style={{ height: "550px", maxWidth: "95%", margin: "auto" }}
+              className="rounded-xl shadow-lg max-w-2xl z-10 border-2 border-green-700"
             >
               <ScaleControl position="bottomleft" />
               <LocateButton />
@@ -543,14 +605,64 @@ export default function LiveMap() {
         )}
       </div>
 
-      {/* Description */}
-      <div className="flex flex-col items-center max-w-2xl mx-auto gap-1 my-3">
+      {/* <div className="flex flex-col items-center max-w-2xl mx-auto gap-1 ">
+        <Button
+          size="lg"
+          className="rounded-xl font-bold  w-[95%] shadow-md  border-2"
+          onClick={handleLocationRequest}
+        >
+          <span className="flex items-center gap-1">
+            <MapPinIcon width={15} />
+            Where Am I ?
+          </span>
+        </Button>
+      </div> */}
+
+      {/* To Attractions */}
+      <div className="flex flex-col items-center max-w-2xl mx-auto gap-1">
         {showLiveMap ? (
-          <div className="max-w-4xl mx-auto p-6">
+          <div className="max-w-3xl mx-auto px-3 pt-3">
+            <h1 className="text-3xl font-bold mb-4">Top Attractions</h1>
+            <div className="flex overflow-x-scroll space-x-4">
+              {markers.map((marker, index) => (
+                <div
+                  key={index}
+                  className="min-w-[30%] flex-shrink-0 relative rounded-xl overflow-hidden shadow-lg"
+                  onClick={() => handleAttractionClick(marker)}
+                >
+                  <Image
+                    src={marker.image}
+                    alt={marker.alt}
+                    height={200}
+                    width={200}
+                    objectFit="cover"
+                    className="rounded-xl"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-2 text-white">
+                    <h2 className="text-center text-lg font-semibold">
+                      {marker.title}
+                    </h2>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <Skeleton
+            className="  rounded-3xl w-full"
+            style={{ height: "200px", maxWidth: "95%", margin: "auto" }}
+          />
+        )}
+      </div>
+
+      {/* Description */}
+      <div className="flex flex-col items-center max-w-2xl mx-auto gap-1 ">
+        {showLiveMap ? (
+          <div className="max-w-4xl mx-auto px-3 pt-6">
             <h1 className="text-3xl font-bold mb-4">
               {locationDescriptions[selectedLocation].title}
             </h1>
-            <p className="text-lg leading-relaxed  mb-4">
+            <p className="text-lg leading-relaxed mb-4">
               {locationDescriptions[selectedLocation].description}
             </p>
             <p className="text-lg leading-relaxed">
@@ -565,16 +677,16 @@ export default function LiveMap() {
         )}
 
         {showLiveMap ? (
-          <div className="flex flex-col items-center gap-2 w-11/12 justify-center  my-3 rounded-2xl border border-green-700 py-6 bg-green-50 max-w-2xl px-9 shadow-lg border-dotted">
+          <div className="flex flex-col items-center max-w-2xl mx-auto gap-2 border border-green-700 border-dotted rounded-xl p-6 w-11/12 m-6">
             <h1 className="font-bold mb-3">Emergency Contact</h1>
 
             <Button
               size="lg"
-              className="w-full rounded-full  bg-green-600 font-semibold"
+              className="w-full rounded-full  bg-green-600 font-semibold text-sm"
             >
               <a
                 href="tel:04-5384444"
-                className="flex items-center justify-center gap-2 text-base text-white py-3 px-4"
+                className="flex items-center gap-2 text-base text-white py-3 px-4"
               >
                 <PhoneIcon size={18} />
                 <span>Balai Bomba (BM): 04 - 538 4444</span>
@@ -583,11 +695,11 @@ export default function LiveMap() {
 
             <Button
               size="lg"
-              className="w-full rounded-full bg-green-600 font-semibold"
+              className="w-full rounded-full bg-green-600 font-semibold text-sm"
             >
               <a
                 href="tel:04-5374693"
-                className="flex items-center justify-center gap-2 text-base text-white py-3 px-4"
+                className="flex items-center  gap-2 text-base text-white py-3 px-4"
               >
                 <PhoneIcon size={18} />
                 <span>Balai Bomba (BM): 04 - 537 4693</span>
