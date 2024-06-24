@@ -368,7 +368,8 @@ export default function LiveMap() {
       }).addTo(map);
       marker
         .bindPopup(
-          `<b>${selectedMarker.title}</b><br><img src="${selectedMarker.image}" alt="${selectedMarker.alt}" style="width: 100%; height: auto;">`
+          // `<b>${selectedMarker.title}</b><br><img src="${selectedMarker.image}" alt="${selectedMarker.alt}" style="width: 100%; height: auto;">`
+          `<b>${selectedMarker.title}</b>`
         )
         .openPopup();
     }
@@ -546,7 +547,7 @@ export default function LiveMap() {
                     position={marker.position}
                     icon={CustomIcon}
                   >
-                    <Popup>
+                    {/* <Popup>
                       <div className="min-w-[200px] max-w-[200px]">
                         <h2 className="truncate">{marker.title}</h2>
                         {marker.image && (
@@ -576,6 +577,38 @@ export default function LiveMap() {
                             </DialogContent>
                           </Dialog>
                         )}
+                      </div>
+                    </Popup> */}
+                    <Popup>
+                      <div className=" max-w-[200px]">
+                        <h2 className="truncate">{marker.title}</h2>
+                        {/* {marker.image && (
+                          <Dialog>
+                            <DialogTrigger asChild>
+                              <Image
+                                src={marker.image}
+                                alt={marker.alt}
+                                width={1000}
+                                height={1000}
+                                style={{ width: "200px", height: "auto" }}
+                                className="object-cover cursor-pointer"
+                              />
+                            </DialogTrigger>
+                            <DialogContent className="dialog-content sm:max-w-[425px]">
+                              <DialogHeader>
+                                <DialogTitle>{marker.title}</DialogTitle>
+                              </DialogHeader>
+                              <Image
+                                src={marker.image}
+                                alt={marker.alt}
+                                width={1000}
+                                height={1000}
+                                style={{ width: "auto", height: "auto" }}
+                                className="object-cover"
+                              />
+                            </DialogContent>
+                          </Dialog>
+                        )} */}
                       </div>
                     </Popup>
                   </Marker>
@@ -622,7 +655,7 @@ export default function LiveMap() {
       <div className="flex flex-col items-center max-w-2xl mx-auto gap-1">
         {showLiveMap ? (
           <div className="max-w-3xl mx-auto px-3 pt-3">
-            <h1 className="text-3xl font-bold mb-4">Top Attractions</h1>
+            <h1 className="text-2xl font-bold mb-4">Top Attractions</h1>
             <div className="flex overflow-x-scroll space-x-4">
               {markers.map((marker, index) => (
                 <div
@@ -636,7 +669,11 @@ export default function LiveMap() {
                     height={200}
                     width={200}
                     objectFit="cover"
-                    className="rounded-xl"
+                    className={`rounded-xl ${
+                      selectedMarker === marker
+                        ? "border-4 border-blue-500"
+                        : "border-2 border-transparent"
+                    }`}
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-2 text-white">
                     <h2 className="text-center text-lg font-semibold">
@@ -658,8 +695,8 @@ export default function LiveMap() {
       {/* Description */}
       <div className="flex flex-col items-center max-w-2xl mx-auto gap-1 ">
         {showLiveMap ? (
-          <div className="max-w-4xl mx-auto px-3 pt-6">
-            <h1 className="text-3xl font-bold mb-4">
+          <div className="max-w-3xl mx-auto px-3 pt-6">
+            <h1 className="text-2xl font-bold mb-4">
               {locationDescriptions[selectedLocation].title}
             </h1>
             <p className="text-lg leading-relaxed mb-4">
