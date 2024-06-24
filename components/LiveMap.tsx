@@ -75,8 +75,8 @@ const CustomIcon = L.icon({
   // iconAnchor: [12, 25],
 });
 interface CustomControlProps {
-  position: "topleft" | "topright" | "bottomleft" | "bottomright";
-  children: ReactNode;
+  position: L.ControlPosition;
+  children: React.ReactNode;
 }
 
 type LocationCoordinates = {
@@ -312,14 +312,15 @@ export default function LiveMap() {
     };
 
     return (
-      <div style={{ position: "absolute", top: 120, right: 10, zIndex: 1000 }}>
+      <div style={{ position: "absolute", top: 10, left: 10, zIndex: 1000 }}>
         <Button
-          size="icon"
+          size="sm"
           variant="outline"
           className="flex "
           onClick={handleLocationRequest}
         >
-          <NavigationIcon size={18} />
+          <LocateIcon size={18} className="mr-1" />
+          Locate Me
         </Button>
       </div>
     );
@@ -476,7 +477,7 @@ export default function LiveMap() {
           </DialogContent>
         </Dialog>
 
-        <div className="flex flex-col items-center mx-auto gap-1">
+        {/* <div className="flex flex-col items-center mx-auto gap-1">
           <Button
             size="icon"
             variant="outline"
@@ -485,7 +486,7 @@ export default function LiveMap() {
           >
             <LocateIcon width={18} />
           </Button>
-        </div>
+        </div> */}
       </div>
 
       {/* Map Container */}
@@ -616,7 +617,7 @@ export default function LiveMap() {
                   </Marker>
                 ))}
 
-              <CustomControl position="topright">
+              {/* <CustomControl position="topright">
                 <Button
                   size="icon"
                   variant="outline"
@@ -629,7 +630,7 @@ export default function LiveMap() {
                     <MapPinIcon size={18} />
                   )}
                 </Button>
-              </CustomControl>
+              </CustomControl> */}
             </MapContainer>
           </div>
         ) : (
@@ -644,7 +645,7 @@ export default function LiveMap() {
       <div className="flex flex-col items-center max-w-2xl mx-auto gap-1 mt-2">
         {showLiveMap ? (
           <div className="max-w-3xl mx-auto px-3 pt-2">
-            <h1 className="text-lg font-bold mb-2 flex items-center mx-auto justify-center">
+            <h1 className="text-lg font-bold mb-2 flex items-center mx-auto">
               <StarsIcon size={18} className="mr-2" />
               Top Attractions
             </h1>
