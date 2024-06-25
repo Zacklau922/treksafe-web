@@ -21,33 +21,71 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  ChevronsRightIcon,
-  GemIcon,
-  HelpCircleIcon,
-  InfoIcon,
-  MapPinIcon,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  HomeIcon,
+  MenuIcon,
   MountainSnowIcon,
-  NavigationIcon,
-  SearchIcon,
+  SparklesIcon,
+  UserIcon,
 } from "lucide-react";
 
 const Header = () => {
   return (
     <div className="max-w-2xl mx-auto w-full">
       <div className="flex justify-center items-center pt-2 pb-2 px-3">
-        <div className="flex flex-col gap-1 justify-center text-center items-center">
-          <h1 className="text-lg font-bold">
-            <span className="flex items-center gap-1 text-center justify-center">
-              <MountainSnowIcon size={15} />
+        <div className="flex w-full justify-between items-center">
+          <Sheet key="left">
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full ">
+                <MenuIcon size={18} />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left">
+              <SheetHeader>
+                <SheetTitle>Menu</SheetTitle>
+                <SheetDescription>Coming Soon....</SheetDescription>
+              </SheetHeader>
+
+              <SheetFooter></SheetFooter>
+            </SheetContent>
+          </Sheet>
+          <h1 className="text-xl font-bold">
+            <span className="flex items-center gap-1 ">
+              <MountainSnowIcon size={22} />
               TrekSafe
             </span>
           </h1>
-          <p className="text-xs font-medium text-center italic">
+
+          <Sheet key="left">
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full ">
+                <UserIcon size={18} />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right">
+              <SheetHeader>
+                <SheetTitle>Welcome Guest !</SheetTitle>
+                <SheetDescription>Coming Soon....</SheetDescription>
+              </SheetHeader>
+
+              <SheetFooter></SheetFooter>
+            </SheetContent>
+          </Sheet>
+          {/* <p className="text-xs font-normal text-center italic">
             <span className="flex items-center gap-1">
-              <ChevronsRightIcon size={13} />
+              <SparklesIcon size={13} />
               Uncover Hidden Gems on Every Summit
             </span>
-          </p>
+          </p> */}
         </div>
         {/* <Dialog>
           <DialogTrigger asChild>

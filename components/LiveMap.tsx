@@ -39,6 +39,8 @@ import {
   MapPinIcon,
   MapPinOffIcon,
   NavigationIcon,
+  SparkleIcon,
+  SparklesIcon,
   StarsIcon,
 } from "lucide-react";
 import { FullscreenControl } from "react-leaflet-fullscreen";
@@ -292,6 +294,21 @@ export default function LiveMap() {
   const [selectedMarker, setSelectedMarker] = useState<MarkerType | null>(null);
   const [markersVisible, setMarkersVisible] = useState(true);
   const [showLiveMap, setShowLiveMap] = useState(false);
+  const [weatherData, setWeatherData] = useState(null);
+  const apiKey = "82ca4e2718d77fd607019f9cd65a6af4";
+
+  useEffect(() => {
+    const fetchWeather = async () => {
+      const res = await fetch(
+        `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=london`
+      );
+      const data = await res.json();
+      setWeatherData(data);
+      console.log(data);
+    };
+
+    fetchWeather();
+  }, [apiKey]);
 
   const handleLocateMe = () => {
     setTriggerLocation(true);
@@ -316,7 +333,7 @@ export default function LiveMap() {
         <Button
           size="sm"
           variant="outline"
-          className="flex "
+          className="flex rounded-full text-xs font-bold"
           onClick={handleLocationRequest}
         >
           <LocateIcon size={18} className="mr-1" />
@@ -432,7 +449,7 @@ export default function LiveMap() {
             <Button
               size="icon"
               variant="outline"
-              className="w-full rounded-lg font-bold shadow-md border-green-700 text-green-700 px-3"
+              className="w-full rounded-full font-bold shadow-md border-2 border-green-500 text-green-800 bg-green-50 px-3 hover:bg-white"
             >
               <span className="flex justify-between w-full items-center gap-1">
                 <span className="flex items-center">
@@ -504,7 +521,7 @@ export default function LiveMap() {
               zoom={15}
               scrollWheelZoom={true}
               style={{ maxWidth: "95%", margin: "auto" }}
-              className="rounded-xl shadow-lg max-w-2xl z-10 border-4 border-green-700 max-h-[60vh]"
+              className="rounded-2xl shadow-lg max-w-2xl z-10 max-h-[60vh]"
             >
               <ScaleControl position="bottomleft" />
               <LocateButton />
@@ -645,8 +662,8 @@ export default function LiveMap() {
       <div className="flex flex-col items-center max-w-2xl mx-auto gap-1 mt-2">
         {showLiveMap ? (
           <div className="max-w-3xl mx-auto px-3 pt-2">
-            <h1 className="text-lg font-bold mb-2 flex items-center mx-auto">
-              <StarsIcon size={18} className="mr-2" />
+            <h1 className="text-lg font-bold mb-2 flex items-center mx-auto justify-center">
+              <SparklesIcon size={18} className="mr-2" />
               Top Attractions
             </h1>
             <div className="flex overflow-x-scroll space-x-4">
@@ -664,7 +681,7 @@ export default function LiveMap() {
                     objectFit="cover"
                     className={`rounded-xl ${
                       selectedMarker === marker
-                        ? "border-4 border-blue-500"
+                        ? "border-4 border-green-400"
                         : "border-2 border-transparent"
                     }`}
                   />
